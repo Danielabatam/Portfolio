@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: mypassword
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
 
   web:
     build: ./django-app
@@ -19,6 +21,12 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    networks:
+      - mynetwork
 
 volumes:
   postgres_data:
+
+networks:
+  mynetwork:
+#    driver: bridge
